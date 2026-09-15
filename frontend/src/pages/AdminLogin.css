@@ -1,0 +1,105 @@
+.admin-login-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: #080a0e;
+    color: #f5f7fa;
+    font-family: Inter, system-ui, sans-serif;
+}
+
+.admin-login-card {
+    width: min(100%, 420px);
+    padding: 36px;
+    border: 1px solid #252e39;
+    border-radius: 18px;
+    background: #0f1319;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+}
+
+.admin-login-eyebrow {
+    margin: 0 0 12px;
+    color: #5f9ff5;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.admin-login-card h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.admin-login-subtitle {
+    margin: 12px 0 28px;
+    color: #8fa0b5;
+    line-height: 1.5;
+}
+
+.admin-login-card label {
+    display: block;
+    margin-top: 16px;
+    color: #aab8c9;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.admin-login-card input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 8px;
+    padding: 12px 13px;
+    border: 1px solid #303a47;
+    border-radius: 8px;
+    background: #151a22;
+    color: #ffffff;
+    font: inherit;
+}
+
+.admin-login-card button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 13px;
+    border: 0;
+    border-radius: 8px;
+    background: #5f9ff5;
+    color: #08101d;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-login-card button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.google-login-button {
+    margin-top: 12px !important;
+    border: 1px solid #303a47 !important;
+    background: transparent !important;
+    color: #f5f7fa !important;
+}
+
+.text-login-button {
+    display: block;
+    width: auto !important;
+    margin: 14px auto 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    color: #75a9f4 !important;
+    font-size: 13px;
+}
+
+.admin-login-notice {
+    margin: 16px 0 0;
+    color: #23d6a0;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.admin-login-error {
+    margin: 16px 0 0;
+    color: #f87171;
+    font-size: 13px;
+}

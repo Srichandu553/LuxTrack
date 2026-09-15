@@ -1,0 +1,41 @@
+{
+  "name": "luxtrack-backend",
+  "version": "1.0.0",
+  "description": "Backend API for LuxTrack - Luxury Asset Price Tracking and Comparison Platform",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node --test",
+    "migrate": "node src/scripts/migrate.js",
+    "seed": "node src/scripts/seedCatalog.js",
+    "seed:catalog": "node src/scripts/seedCatalog.js",
+    "admin:create": "node src/scripts/createAdmin.js"
+    ,"db:backup": "node src/scripts/backupDatabase.js"
+  },
+  "keywords": [
+    "luxtrack",
+    "luxury-assets",
+    "price-tracking",
+    "price-comparison",
+    "cars",
+    "watches",
+    "art"
+  ],
+  "author": "LuxTrack Team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "groq-sdk": "^1.6.0",
+    "helmet": "^8.1.0",
+    "node-cron": "^4.6.0",
+    "nodemailer": "^10.0.10",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,18 @@
+# Node / frontend
+node_modules/
+**/node_modules/
+frontend/dist/
+**/dist/
+
+# Environment files
+.env
+.env.*
+!**/.env.example
+
+# OS / editor
+.DS_Store
+.vscode/
+
+# Coverage / debug
+coverage/
+*.log
