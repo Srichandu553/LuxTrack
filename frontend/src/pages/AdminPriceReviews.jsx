@@ -41,11 +41,7 @@ function AdminPriceReviews() {
                 response
             );
 
-            setReviews(
-                Array.isArray(response)
-                    ? response
-                    : []
-            );
+            setReviews(Array.isArray(response) ? response : response?.data || []);
 
         } catch (error) {
 

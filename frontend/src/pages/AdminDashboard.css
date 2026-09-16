@@ -140,6 +140,20 @@
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
+.dashboard-card-button {
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+}
+
+.dashboard-card-button:focus-visible,
+.open-reviews-button:focus-visible,
+.dashboard-header-button:focus-visible {
+    outline: 2px solid #8bbdff;
+    outline-offset: 3px;
+}
+
 .dashboard-card:hover,
 .review-action-card:hover,
 .assets-section:hover {

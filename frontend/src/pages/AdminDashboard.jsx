@@ -272,7 +272,12 @@ function AdminDashboard({
                     PENDING PRICE REVIEWS
                 ================================= */}
 
-                <section className="dashboard-card">
+                <button
+                    type="button"
+                    className="dashboard-card dashboard-card-button"
+                    onClick={onOpenPriceReviews}
+                    aria-label={`Open ${pendingCount} pending price reviews`}
+                >
 
 
                     <div className="dashboard-card-icon">
@@ -323,7 +328,7 @@ function AdminDashboard({
 
                     </div>
 
-                </section>
+                </button>
 
 
                 {/* =================================
