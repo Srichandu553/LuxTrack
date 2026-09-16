@@ -27,7 +27,7 @@ function AssetManagement({
     const [showArchived, setShowArchived] = useState(false);
     const [categoryOptions, setCategoryOptions] = useState([]);
     const [sort, setSort] = useState("newest");
-    const [pagination, setPagination] = useState({ page: 1, totalPages: 1 });
+    const [pagination, setPagination] = useState({ page: 1, totalPages: 1, total: 0 });
 
 
     /*
@@ -65,7 +65,7 @@ function AssetManagement({
             ) {
 
                 setAssets(result.assets);
-                setPagination(result.pagination || { page: 1, totalPages: 1 });
+                setPagination(result.pagination || { page: 1, totalPages: 1, total: result.assets.length });
 
             } else {
 
@@ -427,7 +427,7 @@ function AssetManagement({
                     </span>
 
                     <strong>
-                        {assets.length}
+                        {pagination.total || assets.length}
                     </strong>
 
                 </div>

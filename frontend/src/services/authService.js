@@ -3,6 +3,17 @@ import axios from "axios";
 const API_URL = `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/auth`;
 const TOKEN_KEY = "luxtrack_admin_token";
 
+axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401 && getAuthToken()) {
+            localStorage.removeItem(TOKEN_KEY);
+            window.dispatchEvent(new CustomEvent("luxtrack:auth-expired"));
+        }
+        return Promise.reject(error);
+    }
+);
+
 export const login = async (email, password) => {
     const response = await axios.post(`${API_URL}/login`, {
         email,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import AdminPriceReviews from "./pages/AdminPriceReviews.jsx";
@@ -24,6 +24,16 @@ function App() {
 
     const [publicPage, setPublicPage] = useState("landing");
     const [postLoginPage, setPostLoginPage] = useState("dashboard");
+
+    useEffect(() => {
+        const handleAuthExpired = () => {
+            setAuthenticated(false);
+            setPublicPage("login");
+            setPostLoginPage("dashboard");
+        };
+        window.addEventListener("luxtrack:auth-expired", handleAuthExpired);
+        return () => window.removeEventListener("luxtrack:auth-expired", handleAuthExpired);
+    }, []);
 
     if (publicPage === "landing") {
         return (
