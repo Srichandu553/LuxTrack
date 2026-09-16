@@ -7,7 +7,7 @@ const formatPrice = (asset) => {
     return `${asset.currency || "INR"} ${Number(asset.current_price).toLocaleString()}`;
 };
 
-function LandingPage({ onLogin, onRegister, onExplore, onDashboard, authenticated }) {
+function LandingPage({ onLogin, onRegister, onExplore, onDashboard, onAccount, authenticated }) {
     const [assets, setAssets] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -31,6 +31,7 @@ function LandingPage({ onLogin, onRegister, onExplore, onDashboard, authenticate
                     <a href="#about">About</a>
                 </div>
                 <div className="landing-nav-actions">
+                    {authenticated && <button className="landing-login" onClick={onAccount}>Account centre</button>}
                     {authenticated && <button className="landing-login" onClick={onDashboard}>Dashboard</button>}
                     <button className="landing-login" onClick={onLogin}>Log in</button>
                     <button className="landing-button landing-button-small" onClick={onRegister}>Get started</button>

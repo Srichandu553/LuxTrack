@@ -15,8 +15,7 @@ function AdminDashboard({
     onOpenPriceReviews,
     onOpenAssetManagement,
     onOpenHome,
-    onOpenTracking,
-    onOpenAccount
+    onOpenTracking
 }) {
 
     const [pendingCount, setPendingCount] =
@@ -259,7 +258,6 @@ function AdminDashboard({
                     <button type="button" className="dashboard-header-button dashboard-header-button-primary" onClick={onOpenAssetManagement}>
                         Manage assets <span>→</span>
                     </button>
-                    <button type="button" className="dashboard-header-button" onClick={onOpenAccount}>Account</button>
                 </div>
 
             </header>

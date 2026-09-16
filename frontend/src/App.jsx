@@ -60,6 +60,10 @@ function App() {
                     setCurrentPage("dashboard");
                     setPublicPage("app");
                 }}
+                onAccount={() => {
+                    setCurrentPage("account");
+                    setPublicPage("app");
+                }}
             />
         );
     }
@@ -117,7 +121,6 @@ function App() {
                     )
                 }
                 onOpenTracking={() => setCurrentPage("tracking")}
-                onOpenAccount={() => setCurrentPage("account")}
                 onOpenHome={() => setPublicPage("landing")}
 
             />
@@ -268,7 +271,6 @@ function App() {
                 )
             }
             onOpenTracking={() => setCurrentPage("tracking")}
-            onOpenAccount={() => setCurrentPage("account")}
             onOpenHome={() => setPublicPage("landing")}
 
         />
