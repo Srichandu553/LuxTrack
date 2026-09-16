@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     login,
     register,
@@ -19,9 +19,17 @@ function AdminLogin({ onLogin, initialMode = "login", onBack }) {
     const [error, setError] = useState("");
     const [notice, setNotice] = useState("");
     const [loading, setLoading] = useState(false);
+    const [retryAfter, setRetryAfter] = useState(0);
+
+    useEffect(() => {
+        if (retryAfter <= 0) return undefined;
+        const timer = window.setInterval(() => setRetryAfter((value) => Math.max(0, value - 1)), 1000);
+        return () => window.clearInterval(timer);
+    }, [retryAfter]);
 
     const submit = async (event) => {
         event.preventDefault();
+        if (retryAfter > 0) return;
         setLoading(true);
         setError("");
         setNotice("");
@@ -46,6 +54,10 @@ function AdminLogin({ onLogin, initialMode = "login", onBack }) {
                 onLogin(response.user);
             }
         } catch (requestError) {
+            const retrySeconds = Number(requestError.response?.headers?.["retry-after"]);
+            if (requestError.response?.status === 429 && Number.isFinite(retrySeconds)) {
+                setRetryAfter(retrySeconds);
+            }
             setError(
                 requestError.response?.data?.message ||
                 "Unable to sign in to LuxTrack."
@@ -113,9 +125,11 @@ function AdminLogin({ onLogin, initialMode = "login", onBack }) {
                 {error && <p className="admin-login-error">{error}</p>}
                 {notice && <p className="admin-login-notice">{notice}</p>}
 
-                <button type="submit" disabled={loading}>
+                <button type="submit" disabled={loading || retryAfter > 0}>
                     {loading
                         ? "Please wait..."
+                        : retryAfter > 0
+                        ? `Try again in ${retryAfter}s`
                         : mode === "register"
                         ? "Create account"
                         : mode === "forgot"

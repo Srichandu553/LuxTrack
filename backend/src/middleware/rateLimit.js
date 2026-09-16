@@ -24,6 +24,7 @@ export const createRateLimit = ({ windowMs, max, message }) => (req, res, next) 
     res.setHeader("RateLimit-Reset", Math.ceil(bucket.resetAt / 1000));
 
     if (bucket.count > max) {
+        res.setHeader("Retry-After", Math.max(1, Math.ceil((bucket.resetAt - now) / 1000)));
         return res.status(429).json({ success: false, message });
     }
 
