@@ -11,6 +11,9 @@ function AdminLogin({ onLogin, initialMode = "login", onBack }) {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [resetToken, setResetToken] = useState(() =>
+        new URLSearchParams(window.location.search).get("token") || ""
+    );
     const [mode, setMode] = useState(() =>
         new URLSearchParams(window.location.search).has("token")
             ? "reset"
@@ -37,14 +40,15 @@ function AdminLogin({ onLogin, initialMode = "login", onBack }) {
         try {
             if (mode === "forgot") {
                 const response = await requestPasswordReset(email);
-                setNotice(
-                    response.resetToken
-                        ? `Development reset token: ${response.resetToken}`
-                        : response.message
-                );
+                if (response.resetToken) {
+                    setResetToken(response.resetToken);
+                    setNotice("Your development reset token is ready. Set a new password below.");
+                    setMode("reset");
+                } else {
+                    setNotice(response.message);
+                }
             } else if (mode === "reset") {
-                const token = new URLSearchParams(window.location.search).get("token");
-                const response = await resetPassword(token, password);
+                const response = await resetPassword(resetToken, password);
                 setNotice(response.message);
                 setMode("login");
             } else {
@@ -94,6 +98,18 @@ function AdminLogin({ onLogin, initialMode = "login", onBack }) {
                             value={name}
                             onChange={(event) => setName(event.target.value)}
                             autoComplete="name"
+                            required
+                        />
+                    </label>
+                )}
+
+                {mode === "reset" && (
+                    <label>
+                        Reset token
+                        <input
+                            value={resetToken}
+                            onChange={(event) => setResetToken(event.target.value)}
+                            autoComplete="off"
                             required
                         />
                     </label>
