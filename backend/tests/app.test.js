@@ -26,6 +26,18 @@ test("GET /health returns service status", async () => {
   });
 });
 
+test("GET /health/ready reports database readiness", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/health/ready`);
+    const body = await response.json();
+
+    assert.ok([200, 503].includes(response.status));
+    assert.equal(body.success, response.status === 200);
+    assert.ok(["ready", "not_ready"].includes(body.status));
+    assert.ok(["ok", "unavailable"].includes(body.database));
+  });
+});
+
 test("protected profile endpoint rejects unauthenticated requests", async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/api/auth/profile`);
